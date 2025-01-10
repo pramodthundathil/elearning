@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="container">
+        <h1>{{course.course_title}}</h1>
+        <p>{{course.description}}</p>
+    </div>
+    <h1>Classes</h1>
+    {% for i in course.course.all %}
+    <div class="classes">
+        <div class="row">
+            
+            <div class="col-md-4">
+                {% if i.video %}
+                            <video width="320" height="240" controls>
+                                <source src="{{ i.video.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% else %}
+                            No video available
+                        {% endif %}
+            </div>
+            <div class="col-md-8">
+                {{i.title}}
+                <p>{{i.description}}</p>
+                {% if i.material %}
+                            <a href="{{ i.material.url }}" download>Download Material</a>
+                        {% else %}
+                            No material available
+                        {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}

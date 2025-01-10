@@ -1,0 +1,17 @@
+{% extends "adminindex.html" %}
+
+{% block admin %}
+<div style="max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h2>Update Study Material</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media}}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Material</button>
+    </form>
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <a href="{%url 'approve_verification' materials.id %}" class="btn btn-success">Approve Verification</a>
+    </form>
+</div>
+{% endblock %}

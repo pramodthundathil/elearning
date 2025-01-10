@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+  <!-- Courses Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
+            <h1 class="mb-5">Popular Courses</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+
+            {% for i in courses %}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="course-item bg-light">
+                    <div class="position-relative overflow-hidden">
+                        
+                    </div>
+                    <div class="text-center p-4 pb-0">
+                        <h3 class="mb-0"></h3>
+                        
+                        <h5 class="mb-4">{{i.course_title}}</h5>
+                        <p>{{i.description}}</p>
+                        <a href="{%url 'course_details' i.id %}" class="btn btn-info">Attend</a>
+                    </div>
+                    <div class="d-flex border-top">
+                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>{{i.user}}</small>
+                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i></small>
+                        <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>{{i.added_date}}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor  %}
+           
+        </div>
+    </div>
+</div>
+<!-- Courses End -->
+
+{% endblock %}

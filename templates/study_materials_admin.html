@@ -1,0 +1,46 @@
+{% extends 'adminindex.html' %}
+{% block admin %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">Study Materials</h2>
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addMaterialModal">
+        Add Study Material
+    </button>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Verified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example row -->
+            {% for items in materials %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{items.title}}</td>
+                <td>{{items.user}}</td>
+                <td>{{items.category}}</td>
+                <td>
+                    {% if items.verified == True %}
+                    <span class="text-success"><i class="bi bi-patch-check"></i></span> Verified
+                    {% elif items.verified == False %}
+                    <span class="text-warning"><i class="bi bi-ban"></i></span> Not Verified
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{%url 'update_material_admin' items.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+{% endblock %}
