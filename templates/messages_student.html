@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="container">
+        <h1>Messages From Teacher</h1>
+
+
+
+        <div class="d-flex flex-wrap">
+            {% for message in messages_student %}
+                <div class="card m-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ message.user.username }}</h5>
+                        <p class="card-text">{{ message.content }}</p>
+                        <p class="card-text"><small class="text-muted">{{ message.timestamp }}</small></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

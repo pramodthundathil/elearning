@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import TextInput,PasswordInput, ModelForm
-from .models import Student
+from .models import Student, MessageStudent
 from django import forms
 from django.contrib.auth.hashers import make_password
 
@@ -51,4 +51,17 @@ class StudentForm(forms.ModelForm):
             'stream': forms.Select(attrs={'class': 'form-control', 'id': 'stream'}),
             'student_roll': forms.TextInput(attrs={'class': 'form-control', 'id': 'student_roll'}),
             'student_dob': forms.DateInput(attrs={'class': 'form-control', 'id': 'student_dob', 'type': 'date'}),
+        }
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = MessageStudent
+        fields = ["content"]
+
+        widgets = {
+            
+            
+            'content': forms.Textarea(attrs={'class': 'form-control', 'id': 'content'}),
+            
+            
         }

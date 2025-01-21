@@ -32,3 +32,9 @@ class Teacher(models.Model):
     teacher_qualification = models.CharField(max_length=100)
     teacher_experience = models.CharField(max_length=100)
     verified = models.BooleanField(default=False)
+
+
+class MessageStudent(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='messages')
+  content = models.TextField()
+  timestamp = models.DateTimeField(auto_now_add=True)

@@ -21,6 +21,8 @@ urlpatterns = [
     path("delete_student/<int:id>",views.delete_student,name="delete_student"),
     # path("delete_teacher/<int:id>",views.delete_teacher,name="delete_teacher"),
     path("verified_users/<int:pk>",views.verified_users,name="verified_users"),
- 
+    path("messages_teacher",views.messages_teacher,name="messages_teacher"),
+    path("messages_student",views.messages_student,name="messages_student"),
+    path("delete_message/<int:pk>",views.delete_message,name="delete_message"),
    
     ]

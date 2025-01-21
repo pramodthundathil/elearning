@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import UserAddForm, StudentForm, UserUpdateForm
+from .forms import UserAddForm, StudentForm, UserUpdateForm, MessageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .decorators import admin_only, unauthenticated_user, allowed_users, student_user_check
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
-from .models import Student
+from .models import Student, MessageStudent
 
 # Create your views here.
 
@@ -213,3 +213,30 @@ def verified_users(request,pk):
     users.student.save()
     messages.success(request, "User Verified Successfully")
     return redirect("student_details")
+
+
+def messages_teacher(request):
+    form = MessageForm()
+    messages_teacher = MessageStudent.objects.filter(user=request.user)
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            mess = form.save(commit=False) 
+            mess.user = request.user
+            mess.save()
+            messages.info(request, "Message sent successfully")
+            return redirect('messages_teacher')
+        
+    context = {"form": form, "messages_teacher": messages_teacher}  
+    return render(request,"teacher/messages_teacher.html",context)
+
+
+def delete_message(request, pk):
+    MessageStudent.objects.get(id=pk).delete()
+    messages.success(request, "Message deleted successfully")   
+    return redirect("messages_teacher")
+
+
+def messages_student(request):
+    messages_student = MessageStudent.objects.all()
+    return render(request,"messages_student.html", {"messages_student": messages_student})
